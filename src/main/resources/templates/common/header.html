@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="common-header">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="keywords"
+          content="Java developer, JSP, Servlets, Spring, Spring boot, MVC, Hibernate, REST, passionate, self driven, frontend, backend, job seeker, software developer, suveen, suveen kumar, vundavalli, suveen kumar vundavalli, portfolio, best portfolio, angularjs, angular, html, css, javascript, jquery, bootstrap, mysql"/>
+    <meta name="description"
+          content="An innovative and a committed graduate with passion to have a growth oriented and challenging career in domain of Software Development to tone my experience and to utilize my programming skills through continuous learning and exploring new technologies."/>
+    <meta name="author" content="Suveen Kumar Vundavalli"/>
+    <title>Starter Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+
+    <!-- Custom styles for this template -->
+    <link type="text/css" th:href="@{/css/styles.css}" rel="stylesheet" media="screen"/>
+
+</head>
+
+<body>
+    <div th:fragment="body-scripts">
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script th:src="@{webjars/jquery/2.1.4/jquery.min.js}"></script>
+        <script th:src="@{webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
+    </div>
+</body>
+</html>
