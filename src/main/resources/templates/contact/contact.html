@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/header :: common-header"></head>
+
+<body>
+
+<div th:replace="common/navbar :: common-navbar"></div>
+<div class="vertical-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="well">
+                    <div class="text-center">
+                        <h1 th:text="#{contact.h1.text}"></h1>
+                        <p th:text="#{contact.p.lead}"></p>
+                    </div>
+
+                    <form class="form-horizontal" th:action="@{/contact/}" th:object="${contact}" id="contactForm" method="POST">
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="email" th:text="#{form.email.text}">Email:</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Enter email" name="email"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="firstName" th:text="#{form.firstname.text}">First Name:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="firstName" th:field="*{firstName}" placeholder="Enter first name" name="firstName"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="lastName" th:text="#{form.lastname.text}">Last Name:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="lastName" th:field="*{lastName}" placeholder="Enter last name" name="lastName"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="message" th:text="#{form.message.text}">Message:</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="message" th:field="*{message}" placeholder="Enter your message" name="message"> </textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <button type="submit" class="btn btn-default" th:text="#{form.submit.text}">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /.container -->
+<div th:replace="common/header :: body-scripts"></div>
+
+</body>
+</html>
