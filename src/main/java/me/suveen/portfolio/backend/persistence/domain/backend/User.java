@@ -1,5 +1,8 @@
 package me.suveen.portfolio.backend.persistence.domain.backend;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -7,6 +10,8 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Component
+@Scope("prototype")
 public class User implements Serializable {
 
     public User() {

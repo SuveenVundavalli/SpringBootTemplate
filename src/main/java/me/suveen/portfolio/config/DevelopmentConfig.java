@@ -14,6 +14,14 @@ public class DevelopmentConfig {
 
     @Bean
     public EmailService emailService() {
+
         return new MockEmailService();
     }
+    /*
+    // Can be used in h2 console
+    public ServletRegistrationBean mySqlConsoleServletRegistration() {
+        ServletRegistrationBean bean = new ServletRegistrationBean(new WebdavServlet());
+        bean.addUrlMappings("/console/*");
+        return bean;
+    }*/
 }
