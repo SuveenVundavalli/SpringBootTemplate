@@ -1,10 +1,13 @@
 package me.suveen.portfolio.backend.persistence.domain.backend;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -12,7 +15,7 @@ import java.util.Set;
 @Entity
 @Component
 @Scope("prototype")
-public class User implements Serializable {
+public class User implements Serializable, UserDetails {
 
     public User() {
 
@@ -134,6 +137,32 @@ public class User implements Serializable {
     public void setEnabled(boolean enabled) {
 
         this.enabled = enabled;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+
+        return true;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
+        return authorities;
     }
 
     @Override

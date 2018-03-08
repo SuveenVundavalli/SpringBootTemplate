@@ -5,7 +5,7 @@ import me.suveen.portfolio.backend.persistence.domain.backend.User;
 import me.suveen.portfolio.backend.persistence.domain.backend.UserRole;
 import me.suveen.portfolio.backend.service.UserService;
 import me.suveen.portfolio.enums.RolesEnum;
-import me.suveen.portfolio.utils.UsersUtils;
+import me.suveen.portfolio.utils.UserUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +26,7 @@ public class UserServiceIntegrationTest {
     public void testCreateNewUser() throws Exception {
 
         Set<UserRole> userRoles = new HashSet<>();
-        User basicUser = UsersUtils.createBasicUser();
+        User basicUser = UserUtils.createBasicUser();
         userRoles.add(new UserRole(basicUser, new Role(RolesEnum.USER)));
         User user = userService.createUser(basicUser, userRoles);
         Assert.assertNotNull(user);

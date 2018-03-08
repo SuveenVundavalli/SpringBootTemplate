@@ -6,7 +6,7 @@ import me.suveen.portfolio.backend.persistence.domain.backend.UserRole;
 import me.suveen.portfolio.backend.persistence.repositories.RoleRepository;
 import me.suveen.portfolio.backend.persistence.repositories.UserRepository;
 import me.suveen.portfolio.enums.RolesEnum;
-import me.suveen.portfolio.utils.UsersUtils;
+import me.suveen.portfolio.utils.UserUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +36,7 @@ public class RepositoryIntegrationTest {
     }
 
     @Test
-    public void testCreateNewRole() throws Exception {
+    public void testCreateRole() throws Exception {
 
         Role userRole = createRole(RolesEnum.USER);
         roleRepository.save(userRole);
@@ -46,35 +46,46 @@ public class RepositoryIntegrationTest {
     }
 
     @Test
-    public void testCreateNewUser() throws Exception {
-        User basicUser = UsersUtils.createBasicUser();
-        Role basicRole = createRole(RolesEnum.USER);
+    public void testCreateUser() throws Exception {
 
-        UserRole userRole = new UserRole(basicUser, basicRole);
+        User basicUser = createUser();
 
-        Set<UserRole> userRoles = new HashSet<>();
-        userRoles.add(userRole);
-
-        basicUser.getUserRoles().addAll(userRoles); // if set using setter, then previous roles will be deleted
-
-        for (UserRole ur : userRoles) {
-            roleRepository.save(ur.getRole());
-        }
-
-        basicUser = userRepository.save(basicUser);
         User newlyCreatedUser = userRepository.findById(basicUser.getId()).get();
         Assert.assertNotNull(newlyCreatedUser);
         Assert.assertTrue(newlyCreatedUser.getId() != 0);
 
         Set<UserRole> newlyCreatedUserRoles = newlyCreatedUser.getUserRoles();
-        for(UserRole ur : newlyCreatedUserRoles) {
+        for (UserRole ur : newlyCreatedUserRoles) {
             Assert.assertNotNull(ur.getRole());
             Assert.assertNotNull(ur.getRole().getId());
         }
 
     }
 
+    @Test
+    public void testDeleteUser() throws Exception {
+        User basicUser = createUser();
+        userRepository.deleteById(basicUser.getId());
+    }
+
     private Role createRole(RolesEnum rolesEnum) {
+
         return new Role(rolesEnum);
+    }
+
+    private User createUser() {
+
+        User basicUser = UserUtils.createBasicUser();
+
+        Role basicRole = createRole(RolesEnum.USER);
+        roleRepository.save(basicRole);
+
+        Set<UserRole> userRoles = new HashSet<>();
+        UserRole userRole = new UserRole(basicUser, basicRole);
+        userRoles.add(userRole);
+
+        basicUser.getUserRoles().addAll(userRoles);
+        basicUser = userRepository.save(basicUser);
+        return basicUser;
     }
 }

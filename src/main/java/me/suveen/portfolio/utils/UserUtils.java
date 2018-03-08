@@ -2,12 +2,12 @@ package me.suveen.portfolio.utils;
 
 import me.suveen.portfolio.backend.persistence.domain.backend.User;
 
-public class UsersUtils {
+public class UserUtils {
 
     /**
      * Non instantiable
      */
-    public UsersUtils() {
+    public UserUtils() {
         throw new AssertionError("Non instantiable");
     }
 
