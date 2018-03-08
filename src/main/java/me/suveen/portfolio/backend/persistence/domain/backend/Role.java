@@ -1,5 +1,6 @@
 package me.suveen.portfolio.backend.persistence.domain.backend;
 
+import me.suveen.portfolio.enums.RolesEnum;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,12 @@ public class Role implements Serializable {
 
     public Role() {
 
+    }
+
+    public Role(RolesEnum rolesEnum) {
+
+        this.id = rolesEnum.getId();
+        this.name = rolesEnum.getRoleName();
     }
 
     /**

@@ -9,6 +9,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -26,19 +29,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/contact/**",
             "/error/**/*",
             "/favicon.ico",
-//            "/console/**", //used with h2 db console
+            "/h2-console/**", //used with h2 db console
     };
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
-       /*
-       // Can be used with h2 db
        List<String> activeProfiles = Arrays.asList(environment.getActiveProfiles());
         if(activeProfiles.contains("dev")) {
             http.csrf().disable();
             http.headers().frameOptions().disable();
-        }*/
+        }
 
         http
                 .authorizeRequests()

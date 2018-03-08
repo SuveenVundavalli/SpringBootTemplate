@@ -16,6 +16,12 @@ public class UserRole implements Serializable {
 
     }
 
+    public UserRole(User user, Role role) {
+
+        this.user = user;
+        this.role = role;
+    }
+
     /**
      * The Serial Version UID for Serilizable classes.
      */

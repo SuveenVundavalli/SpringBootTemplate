@@ -18,7 +18,7 @@ public class PortfolioApplicationTests {
 	@Test
 	public void testMessageByLocaleService() {
 		String expectedResult = "Suveen Kumar Vundavalli";
-		String messageId = "index.main.callout";
+		String messageId = "index.h1.text";
 		String actualResult = i18NService.getMessage(messageId);
 		Assert.assertEquals("testMessageByLocaleService", expectedResult, actualResult);
 	}

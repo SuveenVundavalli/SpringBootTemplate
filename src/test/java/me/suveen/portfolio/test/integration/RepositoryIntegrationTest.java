@@ -5,6 +5,8 @@ import me.suveen.portfolio.backend.persistence.domain.backend.User;
 import me.suveen.portfolio.backend.persistence.domain.backend.UserRole;
 import me.suveen.portfolio.backend.persistence.repositories.RoleRepository;
 import me.suveen.portfolio.backend.persistence.repositories.UserRepository;
+import me.suveen.portfolio.enums.RolesEnum;
+import me.suveen.portfolio.utils.UsersUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,8 +28,6 @@ public class RepositoryIntegrationTest {
     @Autowired
     private RoleRepository roleRepository;
 
-    private static final int BASIC_ROLE_ID = 1;
-
     @Before
     public void init() {
 
@@ -38,21 +38,19 @@ public class RepositoryIntegrationTest {
     @Test
     public void testCreateNewRole() throws Exception {
 
-        Role userRole = createBasicRole();
+        Role userRole = createRole(RolesEnum.USER);
         roleRepository.save(userRole);
 
-        Role retrivedRole = roleRepository.findById(BASIC_ROLE_ID).get();
-        Assert.assertNotNull(retrivedRole);
+        Role retrievedRole = roleRepository.findById(RolesEnum.USER.getId()).get();
+        Assert.assertNotNull(retrievedRole);
     }
 
     @Test
     public void testCreateNewUser() throws Exception {
-        User basicUser = createBasicUser();
-        Role basicRole = createBasicRole();
+        User basicUser = UsersUtils.createBasicUser();
+        Role basicRole = createRole(RolesEnum.USER);
 
-        UserRole userRole = new UserRole();
-        userRole.setUser(basicUser);
-        userRole.setRole(basicRole);
+        UserRole userRole = new UserRole(basicUser, basicRole);
 
         Set<UserRole> userRoles = new HashSet<>();
         userRoles.add(userRole);
@@ -76,25 +74,7 @@ public class RepositoryIntegrationTest {
 
     }
 
-    private Role createBasicRole() {
-
-        Role role = new Role();
-        role.setId(BASIC_ROLE_ID);
-        role.setName("ROLE_USER");
-        return role;
-    }
-
-    private User createBasicUser() {
-
-        User user = new User();
-        user.setEmail("suveenkumar.vundavalli@gmail.com");
-        user.setEnabled(true);
-        user.setFirstName("Suveen Kumar");
-        user.setLastName("Vundavalli");
-        user.setPassword("secret");
-        user.setUsername("suveenkumarchowdary");
-        user.setPhoneNumber("8686242020");
-
-        return user;
+    private Role createRole(RolesEnum rolesEnum) {
+        return new Role(rolesEnum);
     }
 }

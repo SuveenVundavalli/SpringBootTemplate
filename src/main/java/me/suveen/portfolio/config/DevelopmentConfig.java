@@ -2,6 +2,8 @@ package me.suveen.portfolio.config;
 
 import me.suveen.portfolio.backend.service.EmailService;
 import me.suveen.portfolio.backend.service.MockEmailService;
+import org.apache.catalina.servlets.WebdavServlet;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -17,11 +19,9 @@ public class DevelopmentConfig {
 
         return new MockEmailService();
     }
-    /*
-    // Can be used in h2 console
     public ServletRegistrationBean mySqlConsoleServletRegistration() {
         ServletRegistrationBean bean = new ServletRegistrationBean(new WebdavServlet());
         bean.addUrlMappings("/console/*");
         return bean;
-    }*/
+    }
 }
