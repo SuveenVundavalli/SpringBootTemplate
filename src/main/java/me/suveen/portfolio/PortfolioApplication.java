@@ -38,8 +38,9 @@ public class PortfolioApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-        User user = UserUtils.createBasicUser();
+        String username = "suveenkumarchowdary";
+        String email = "suveenkumar.vundavalli@gmail.com";
+        User user = UserUtils.createBasicUser(username, email);
         Set<UserRole> userRoles = new HashSet<>();
         userRoles.add(new UserRole(user, roleRepository.save(new Role(RolesEnum.USER))));
         LOG.debug("Creating User with username {}", user.getUsername());
