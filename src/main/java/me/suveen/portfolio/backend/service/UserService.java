@@ -4,6 +4,8 @@ import me.suveen.portfolio.backend.persistence.domain.backend.User;
 import me.suveen.portfolio.backend.persistence.domain.backend.UserRole;
 import me.suveen.portfolio.backend.persistence.repositories.RoleRepository;
 import me.suveen.portfolio.backend.persistence.repositories.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,9 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    /** The application logger **/
+    private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
+
     @Transactional
     public User createUser(User user, Set<UserRole> userRoles) {
 
@@ -38,4 +43,12 @@ public class UserService {
         user = userRepository.save(user);
         return user;
     }
+
+    @Transactional
+    public void updateUserPassword(long userId, String password) {
+        password = bCryptPasswordEncoder.encode(password);
+        userRepository.updateUserPassword(userId, password);
+        LOG.debug("Password updated successfully updated for userId {}", userId);
+    }
+
 }

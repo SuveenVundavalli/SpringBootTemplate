@@ -49,6 +49,9 @@ public class PortfolioApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        roleRepository.save(new Role(RolesEnum.USER));
+        roleRepository.save(new Role(RolesEnum.ADMIN));
+
         User user = UserUtils.createBasicUser(webmasterUsername, webmasterEmail);
         user.setPassword(webmasterPassword);
         Set<UserRole> userRoles = new HashSet<>();
