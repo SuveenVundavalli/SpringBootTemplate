@@ -3,32 +3,22 @@ package me.suveen.portfolio.test.integration;
 import me.suveen.portfolio.backend.persistence.domain.backend.Role;
 import me.suveen.portfolio.backend.persistence.domain.backend.User;
 import me.suveen.portfolio.backend.persistence.domain.backend.UserRole;
-import me.suveen.portfolio.backend.persistence.repositories.RoleRepository;
-import me.suveen.portfolio.backend.persistence.repositories.UserRepository;
 import me.suveen.portfolio.enums.RolesEnum;
-import me.suveen.portfolio.utils.UserUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RepositoryIntegrationTest {
+public class UserIntegrationTest extends AbstractIntegrationTest{
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private RoleRepository roleRepository;
 
     @Rule
     public TestName testName = new TestName();
@@ -76,26 +66,5 @@ public class RepositoryIntegrationTest {
         String email = testName.getMethodName() + "@gmail.com";
         User basicUser = createUser(username, email);
         userRepository.deleteById(basicUser.getId());
-    }
-
-    private Role createRole(RolesEnum rolesEnum) {
-
-        return new Role(rolesEnum);
-    }
-
-    private User createUser(String username, String email) {
-
-        User basicUser = UserUtils.createBasicUser(username, email);
-
-        Role basicRole = createRole(RolesEnum.USER);
-        roleRepository.save(basicRole);
-
-        Set<UserRole> userRoles = new HashSet<>();
-        UserRole userRole = new UserRole(basicUser, basicRole);
-        userRoles.add(userRole);
-
-        basicUser.getUserRoles().addAll(userRoles);
-        basicUser = userRepository.save(basicUser);
-        return basicUser;
     }
 }
