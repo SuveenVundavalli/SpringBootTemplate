@@ -1,6 +1,6 @@
 package me.suveen.portfolio;
 
-import me.suveen.portfolio.web.i18n.I18NService;
+import me.suveen.portfolio.backend.service.I18NService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

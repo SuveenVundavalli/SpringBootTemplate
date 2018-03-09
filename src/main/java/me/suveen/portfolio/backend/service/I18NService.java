@@ -1,4 +1,4 @@
-package me.suveen.portfolio.web.i18n;
+package me.suveen.portfolio.backend.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

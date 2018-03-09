@@ -52,7 +52,7 @@ public class PasswordResetTokenService {
             passwordResetToken = passwordResetTokenRepository.save(passwordResetToken);
             LOG.debug("Successfully created token {} for user {}", passwordResetToken.getToken(), user.getUsername());
         } else {
-            LOG.warn("We couldn't find user with email {}", user.getEmail());
+            LOG.warn("We couldn't find user with email {}", email);
         }
         return passwordResetToken;
     }

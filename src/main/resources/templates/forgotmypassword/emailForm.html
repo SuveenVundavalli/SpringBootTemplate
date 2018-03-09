@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/header :: common-header"></head>
+
+<body>
+
+<div th:replace="common/navbar :: common-navbar"></div>
+<div class="vertical-center">
+
+    <!-- Error and Logout section -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+                <div th:if="${mailSent != null}" class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                    <p th:text="#{forgotmypassword.message.sent.success}"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Form -->
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <h1 class="text-center" th:text="#{forgotmypassword.fill.in.form.below}"></h1>
+                <br/>
+                <div class="well">
+                    <!-- Login Form -->
+                    <form id="forgotPasswordForm" th:action="@{/forgotmypassword}" method="post" role="form">
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label for="email" th:text="#{form.email.text}"></label>
+                            <input type="email" class="form-control" id="email" name="email"/>
+                        </div>
+                        <!-- Submit -->
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary"
+                                    th:text="#{forgotmypassword.submit.text}"></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/header :: body-scripts"></div>
+
+</body>
+</html>
