@@ -10,6 +10,7 @@ import me.suveen.portfolio.utils.UserUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -30,6 +31,15 @@ public class PortfolioApplication implements CommandLineRunner {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Value("${webmaster.username}")
+    private String webmasterUsername;
+
+    @Value("${webmaster.password}")
+    private String webmasterPassword;
+
+    @Value("${webmaster.email}")
+    private String webmasterEmail;
+
 
     public static void main(String[] args) {
 
@@ -38,11 +48,11 @@ public class PortfolioApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        String username = "suveenkumarchowdary";
-        String email = "suveenkumar.vundavalli@gmail.com";
-        User user = UserUtils.createBasicUser(username, email);
+
+        User user = UserUtils.createBasicUser(webmasterUsername, webmasterEmail);
+        user.setPassword(webmasterPassword);
         Set<UserRole> userRoles = new HashSet<>();
-        userRoles.add(new UserRole(user, roleRepository.save(new Role(RolesEnum.USER))));
+        userRoles.add(new UserRole(user, roleRepository.save(new Role(RolesEnum.ADMIN))));
         LOG.debug("Creating User with username {}", user.getUsername());
         userService.createUser(user, userRoles);
         LOG.info("User {} created", user.getUsername());
