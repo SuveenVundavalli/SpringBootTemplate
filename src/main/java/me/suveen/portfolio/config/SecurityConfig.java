@@ -3,6 +3,7 @@ package me.suveen.portfolio.config;
 
 import me.suveen.portfolio.backend.service.UserSecurityService;
 import me.suveen.portfolio.web.controllers.ForgotMyPasswordController;
+import me.suveen.portfolio.web.controllers.SignupController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/h2-console/**", //used with h2 db console
             ForgotMyPasswordController.FORGOT_PASSWORD_URL_MAPPING,
             ForgotMyPasswordController.CHANGE_PASSWORD_PATH,
-
+            SignupController.SIGNUP_URL_MAPPING,
     };
 
     @Override

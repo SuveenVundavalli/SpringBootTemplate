@@ -20,11 +20,14 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li th:if="${#authorization.expression('!isAuthenticated()')}">
-                    <a th:href="@{/login/}" th:text="#{navbar.login.text}">Login</a>
+                    <a th:href="@{/login/}" th:text="#{navbar.login.text}">Log In</a>
                 </li>
+                 <li th:if="${#authorization.expression('!isAuthenticated()')}">
+                     <a th:href="@{/signup}" th:text="#{navbar.signup.text}">Sign up</a>
+                 </li>
                 <li th:if="${#authorization.expression('isAuthenticated()')}">
-                    <form id="logout" th:action="@{/logout}" method="POST" role="form"class="navbar-form">
-                        <button type="submit" th:text="#{navbar.logout.text}" class="btn btn-primary"></button>
+                    <form id="logout" th:action="@{/logout}" method="POST" role="form" class="navbar-form">
+                        <button type="submit" th:text="#{navbar.logout.text}" class="btn btn-primary">Log Out</button>
                     </form>
                 </li>
             </ul>

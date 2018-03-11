@@ -9,7 +9,7 @@ body {
 
 /*Vertical center*/
 .vertical-center {
-    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100%; /* Fallback for browsers do NOT support vh unit */
     min-height: 90vh; /* These two lines are counted as one :-)       */
 
     display: flex;
@@ -17,6 +17,15 @@ body {
 }
 
 /*Carousel center image*/
-.carousel-inner > .item > img{
-    margin:auto;
+.carousel-inner > .item > img {
+    margin: auto;
+}
+
+/*------------------------------
+Signup form
+------------------------------*/
+
+/** Registration page */
+.fieldError {
+    border: 2px solid red;
 }
