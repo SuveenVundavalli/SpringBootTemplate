@@ -46,6 +46,10 @@ public class User implements Serializable, UserDetails {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    private String country;
+
+    private String description;
+
     private boolean enabled;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -170,6 +174,26 @@ public class User implements Serializable, UserDetails {
     public void setPasswordResetTokens(Set<PasswordResetToken> passwordResetTokens) {
 
         this.passwordResetTokens = passwordResetTokens;
+    }
+
+    public String getCountry() {
+
+        return country;
+    }
+
+    public void setCountry(String country) {
+
+        this.country = country;
+    }
+
+    public String getDescription() {
+
+        return description;
+    }
+
+    public void setDescription(String description) {
+
+        this.description = description;
     }
 
     @Override

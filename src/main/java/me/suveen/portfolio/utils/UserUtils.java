@@ -2,6 +2,7 @@ package me.suveen.portfolio.utils;
 
 import me.suveen.portfolio.backend.persistence.domain.backend.User;
 import me.suveen.portfolio.web.controllers.ForgotMyPasswordController;
+import me.suveen.portfolio.web.domain.frontend.UserAccountPayload;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -49,6 +50,23 @@ public class UserUtils {
                         "?id=" + userId +
                         "&token=" + token;
         return passwordResetUrl;
+
+    }
+
+    public static <T extends UserAccountPayload> User fromWebUserToDomainUser(T frontendUserPayload) {
+
+        User user  = new User();
+
+        user.setUsername(frontendUserPayload.getUsername());
+        user.setPassword(frontendUserPayload.getPassword());
+        user.setFirstName(frontendUserPayload.getFirstName());
+        user.setLastName(frontendUserPayload.getLastName());
+        user.setEmail(frontendUserPayload.getEmail());
+        user.setPhoneNumber(frontendUserPayload.getPhoneNumber());
+        user.setCountry(frontendUserPayload.getCountry());
+        user.setEnabled(true);
+        user.setDescription(frontendUserPayload.getDescription());
+        return user;
 
     }
 }
