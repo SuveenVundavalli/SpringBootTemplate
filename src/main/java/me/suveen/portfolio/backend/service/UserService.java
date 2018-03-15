@@ -51,4 +51,11 @@ public class UserService {
         LOG.debug("Password updated successfully updated for userId {}", userId);
     }
 
+    public User findByUserName(String username) {
+        return userRepository.findByUsername(username);
+    }
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
 }
