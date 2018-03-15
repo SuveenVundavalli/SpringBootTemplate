@@ -105,7 +105,7 @@ public class SignupController {
         // There are certain info that the user doesn't set, such as profile image URL and roles
         LOG.debug("Transforming user payload into User domain object");
         User user = UserUtils.fromWebUserToDomainUser(payload);
-
+        LOG.debug("User registration page");
         if(file != null && !file.isEmpty()) {
             String profileImageUrl = s3Service.storeProfileImage(file, payload.getUsername());
             if(profileImageUrl != null) {
@@ -121,7 +121,9 @@ public class SignupController {
         // By default users get the BASIC ROLE
         Set<UserRole> roles = new HashSet<>();
         roles.add(new UserRole(user, new Role(RolesEnum.USER)));
+        LOG.debug("User registration before");
         registeredUser = userService.createUser(user, roles);
+        LOG.debug("User registration after");
         LOG.debug(payload.toString());
 
         // Auto logins the registered user
