@@ -21,7 +21,7 @@ public class DevelopmentConfig {
     }
     public ServletRegistrationBean mySqlConsoleServletRegistration() {
         ServletRegistrationBean bean = new ServletRegistrationBean(new WebdavServlet());
-        bean.addUrlMappings("/console/*");
+        bean.addUrlMappings("/h2-console/*");
         return bean;
     }
 }

@@ -3,6 +3,7 @@ package me.suveen.portfolio.web.controllers;
 import me.suveen.portfolio.backend.persistence.domain.backend.Role;
 import me.suveen.portfolio.backend.persistence.domain.backend.User;
 import me.suveen.portfolio.backend.persistence.domain.backend.UserRole;
+import me.suveen.portfolio.backend.service.S3Service;
 import me.suveen.portfolio.backend.service.UserService;
 import me.suveen.portfolio.enums.RolesEnum;
 import me.suveen.portfolio.utils.UserUtils;
@@ -18,6 +19,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -36,6 +39,9 @@ public class SignupController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private S3Service s3Service;
 
     public static final String SIGNUP_URL_MAPPING = "/signup";
 
@@ -60,7 +66,9 @@ public class SignupController {
     }
 
     @RequestMapping(value = SIGNUP_URL_MAPPING, method = RequestMethod.POST)
-    public String signupPost(@ModelAttribute(PAYLOAD_MODEL_KEY_NAME) @Valid UserAccountPayload payload, ModelMap model) throws IOException{
+    public String signupPost(@ModelAttribute(PAYLOAD_MODEL_KEY_NAME) @Valid UserAccountPayload payload,
+                             @RequestParam(value = "file", required = false) MultipartFile file,
+                             ModelMap model) throws IOException{
 
         this.checkForDuplicates(payload, model);
 
@@ -91,6 +99,16 @@ public class SignupController {
         // There are certain info that the user doesn't set, such as profile image URL and roles
         LOG.debug("Transforming user payload into User domain object");
         User user = UserUtils.fromWebUserToDomainUser(payload);
+
+        if(file != null && !file.isEmpty()) {
+            String profileImageUrl = s3Service.storeProfileImage(file, payload.getUsername());
+            if(profileImageUrl != null) {
+                LOG.debug(profileImageUrl);
+                user.setProfileImageUrl(profileImageUrl);
+            } else {
+                LOG.warn("There is a problem uploading the user image to S3, profile will be created without image");
+            }
+        }
 
         User registeredUser = null;
 

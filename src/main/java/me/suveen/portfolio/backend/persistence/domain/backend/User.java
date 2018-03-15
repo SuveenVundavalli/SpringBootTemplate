@@ -52,6 +52,9 @@ public class User implements Serializable, UserDetails {
 
     private boolean enabled;
 
+    @Column(name = "profile_image_url")
+    private String profileImageUrl;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<PasswordResetToken> passwordResetTokens;
 
@@ -194,6 +197,16 @@ public class User implements Serializable, UserDetails {
     public void setDescription(String description) {
 
         this.description = description;
+    }
+
+    public String getProfileImageUrl() {
+
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+
+        this.profileImageUrl = profileImageUrl;
     }
 
     @Override

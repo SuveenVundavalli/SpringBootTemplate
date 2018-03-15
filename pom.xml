@@ -98,6 +98,20 @@
             <artifactId>hibernate-validator</artifactId>
         </dependency>
 
+        <!--AWS-->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk</artifactId>
+            <version>LATEST</version>
+        </dependency>
+
+        <!--commons-io for file upload-->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>LATEST</version>
+        </dependency>
+
         <!--test data like mockito-->
         <dependency>
             <groupId>uk.co.jemos.podam</groupId>
